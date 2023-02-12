@@ -1,0 +1,228 @@
+<html lang="en">
+  <head>
+    <!-- Setting the title of the page -->
+    <title>Activity Store</title>
+    <!-- Setting the favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <!-- Linking the external stylesheet -->
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <!-- Including Vue CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="js/products.js"></script> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- Creating div for Vue element -->
+    <div id="app">
+      <div id="header">
+        <h2>ACTIVITY STORE</h2>
+      </div>
+      <!-- Creating cart page button -->
+      <div id="checkout">
+        <button
+          id="checkB"
+          @click="showCheckout"
+          v-bind:disabled="!canCheckOut"
+          v-if="showProduct"
+        >
+          <img id="cart" src="images/cart.png" /> {{cartItemCount}}
+        </button>
+        <button
+          id="checkB"
+          @click="showCheckout"
+          v-bind:disabled="showPlaceOrder"
+          v-else
+        >
+          Go Back
+        </button>
+      </div>
+      <div v-if="showProduct">
+        <!-- Creating search bar -->
+        <div id="search-bar">
+          <input type="text" placeholder="Search.." v-model.trim="search" />
+        </div>
+        <!-- Creating sort area -->
+        <div id="sort">
+          <h2>Sort</h2>
+          <p>By</p>
+          <input type="radio" id="subject" value="Subject" v-model="sort.by" />
+          <label for="subject">Subject</label><br />
+          <input
+            type="radio"
+            id="location"
+            value="Location"
+            v-model="sort.by"
+          />
+          <label for="location">Location</label><br />
+          <input type="radio" id="price" value="Price" v-model="sort.by" />
+          <label for="price">Price</label><br />
+          <input type="radio" id="space" value="Space" v-model="sort.by" />
+          <label for="space">Space</label>
+          <p>Order</p>
+          <input type="radio" id="ascending" value="a" v-model="sort.order" />
+          <label for="ascending">Ascending</label><br />
+          <input type="radio" id="descending" value="d" v-model="sort.order" />
+          <label for="descending">Descending</label>
+        </div>
+        <!-- Creating lessons area -->
+        <div id="products">
+          <!-- Loop for showing all lessons -->
+          <div id="product" v-for="product in sortedProducts">
+            <!-- Creating div for lesson details -->
+            <div id="details">
+              <p>Subject: {{ product.title }}</p>
+              <p>Location: {{ product.location }}</p>
+              <p>Price(AED): {{ product.price }}</p>
+              <p>Space: {{ product.displaySpace }}</p>
+              <p>
+                Rating:
+                <i class="fa-solid fa-star" v-for="n in product.rating"></i
+                ><i
+                  class="fa-regular fa-star"
+                  v-for="n in 5-product.rating"
+                ></i>
+              </p>
+              <p v-if="product.space === cartCount(product.id)">
+                Out Of Stock!
+              </p>
+              <p v-else-if="product.space - cartCount(product.id) < 5">
+                Only {{product.space - cartCount(product.id)}} left!
+              </p>
+              <p v-else>Buy Now!</p>
+            </div>
+            <!-- Creating div for image -->
+            <div id="image">
+              <img id="imgsize" v-bind:src="product.image" />
+            </div>
+            <!-- Creating add button with click and disable attributes -->
+            <button
+              id="addB"
+              @click="addItem(product)"
+              v-bind:disabled="!canAdd(product)"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Creating confirmation page -->
+      <div v-else-if="showPlaceOrder">
+        <div id="order-info">
+          <h2>Order Placed Successfully!</h2>
+          <div>Courses Taken : {{order.cart}}</div>
+          <p>Total Courses : {{cart.length}}</p>
+          <p>First Name : {{order.firstName}}</p>
+          <p>Last Name : {{order.lastName}}</p>
+          <p>Address : {{order.address}}</p>
+          <p>City : {{order.city}}</p>
+          <p>Zip : {{order.zip}}</p>
+          <p>Emirate : {{order.state}}</p>
+          <p>Gift : {{order.gift}}</p>
+          <p>Method : {{order.method}}</p>
+        </div>
+      </div>
+      <!-- Creating cart and order information page -->
+      <div v-else>
+        <div id="bucket">
+          <h2>Cart</h2>
+          <div id="cart-items">
+            <div id="cartI" v-for="product in displayCart">
+              <div id="details">
+                <p>Subject: {{ product.title }}</p>
+                <p>Location: {{ product.location }}</p>
+                <p>Price(AED): {{ product.price }}</p>
+                <p>
+                  Rating:
+                  <i class="fa-solid fa-star" v-for="n in product.rating"></i
+                  ><i
+                    class="fa-regular fa-star"
+                    v-for="n in 5-product.rating"
+                  ></i>
+                </p>
+              </div>
+              <!-- Creating div for image -->
+              <div id="image">
+                <img id="imgsize" v-bind:src="product.image" />
+              </div>
+              <!-- Creating remove from cart button -->
+              <button id="removeB" @click="removeItem(product)">Remove</button>
+            </div>
+          </div>
+        </div>
+        <div id="order-info">
+          <h2>Enter Order Information</h2>
+          <div id="order-table">
+            <p>
+              <strong>First Name:</strong>
+              <input v-model.trim="order.firstName" />
+            </p>
+            <p>
+              <strong>Last Name:</strong>
+              <input v-model.trim="order.lastName" />
+            </p>
+            <p>
+              <strong>Address:</strong>
+              <input v-model="order.address" />
+            </p>
+            <p>
+              <strong>City:</strong>
+              <input v-model="order.city" />
+            </p>
+            <p>
+              <strong>Emirate:</strong>
+              <select v-model="order.state">
+                <option disabled value="">Emirate</option>
+                <option v-for="(state, key) in states" v-bind:value="state">
+                  {{key}}
+                </option>
+              </select>
+            </p>
+            <p>
+              <strong>Zip/Postal Code:</strong>
+              <input v-model.number="order.zip" type="number" />
+            </p>
+          </div>
+          <p>
+            <input
+              type="checkbox"
+              id="gift"
+              value="true"
+              v-model="order.gift"
+              v-bind:true-value="order.sendGift"
+              v-bind:false-value="order.dontSendGift"
+            /><label for="gift">Ship As Gift?</label>
+          </p>
+          <p>
+            <input
+              type="radio"
+              id="home"
+              value="Home"
+              v-model="order.method"
+            /><label for="home">Home</label
+            ><input
+              type="radio"
+              id="business"
+              value="Business"
+              v-model="order.method"
+            /><label for="business">Business</label>
+          </p>
+          <button id="placeB" v-on:click="submitForm" v-if="canPlaceOrder">
+            Place Order
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Including external script file -->
+    <script src="js/script.js"></script>
+  </body>
+</html>

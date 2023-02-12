@@ -1,0 +1,299 @@
+/* styling the body */
+body {
+  font-family: sans-serif;
+  background-color: white;
+  margin: 0px;
+}
+
+/* styling the lessons area */
+#products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  margin-left: 30%;
+}
+
+/* styling each lesson */
+#product {
+  width: 370px;
+  height: 280px;
+  border: 5px solid white;
+  border-radius: 15px;
+  padding: 10px;
+  background-color: #f9b931;
+  margin: 10px;
+}
+
+/* setting hover style for each lesson */
+#product:hover {
+  border: 5px solid #677189;
+  font-weight: bold;
+}
+
+/* styling the lesson details */
+#details {
+  width: 170px;
+  height: 200px;
+  display: inline-block;
+  padding-left: 10px;
+  position: absolute;
+}
+
+/* positioning and styling the image area */
+#image {
+  width: 150px;
+  height: 150px;
+  padding-top: 10px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+/* setting the image size */
+#imgsize {
+  width: 150px;
+  height: 150px;
+  padding-left: 200px;
+}
+
+/* styling the add button */
+#addB {
+  background-color: #202d40;
+  color: #e2e2e2;
+  border: none;
+  border-radius: 15px;
+  display: inline-block;
+  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  margin-top: 37px;
+  min-height: 60px;
+  min-width: 0;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+/* setting the effects for add button */
+#addB:active {
+  position: relative;
+  top: -1px;
+  background-color: #202d40;
+}
+
+#addB:disabled {
+  position: relative;
+  top: 1px;
+  border: none;
+  background-color: #677189;
+}
+
+/* styling the cart page button */
+#checkB {
+  background-color: #779a91;
+  border: solid 5px #0d3580;
+  border-radius: 15px;
+  display: inline-block;
+  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  margin-left: 72%;
+  min-height: 60px;
+  min-width: 0;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 20%;
+  will-change: transform;
+}
+
+#checkB:active {
+  position: relative;
+  top: -1px;
+  background-color: #779a91;
+}
+
+/* styling the header */
+#header {
+  background-color: #3f63b5;
+  align-items: center;
+  margin: 0%;
+  padding: 0.05px;
+}
+
+#header > h2 {
+  padding-left: 41%;
+  color: white;
+}
+
+#cart {
+  width: 22px;
+  height: 22px;
+}
+
+/* styling the order information */
+#order-info {
+  border: 5px solid #0d3580;
+  margin: 10px;
+  padding: 10px;
+  padding-left: 5%;
+  background-color: #3f63b5;
+  width: 75%;
+  border-radius: 7px;
+  margin-left: 10%;
+  color: white;
+}
+
+input {
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+#order-table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+#cart-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-left: 10%;
+  margin-right: 8%;
+}
+
+#bucket > h2 {
+  color: #3f63b5;
+  padding-left: 48%;
+}
+
+/* styling the sort area */
+#sort {
+  position: absolute;
+  width: 150px;
+  height: 300px;
+  border: 5px solid #677189;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f9b931;
+  margin: 10px;
+  padding-left: 20px;
+  margin-left: 100px;
+  margin-top: 100px;
+}
+
+/* styling the search bar */
+#search-bar {
+  position: absolute;
+  margin-left: 100px;
+}
+
+#search-bar input[type="text"] {
+  float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+  border: 5px solid #0d3580;
+  border-radius: 10px;
+  background-color: #779a91;
+}
+
+/* styling the remove from cart button */
+#removeB {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  display: inline-block;
+  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+/* setting the effects for remove from cart button */
+#removeB:active {
+  position: relative;
+  top: -1px;
+  background-color: red;
+}
+
+/* styling the cart items */
+#cartI {
+  width: 370px;
+  height: 250px;
+  border: 5px solid #677189;
+  border-radius: 15px;
+  padding: 10px;
+  background-color: #f9b931;
+  margin-bottom: 10px;
+}
+
+/* setting hover style for cart items */
+#cartI:hover {
+  font-weight: bold;
+}
+
+/* styling the place order button */
+#placeB {
+  background-color: white;
+  border: solid 5px #0d3580;
+  border-radius: 15px;
+  display: inline-block;
+  font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: -70px;
+  margin-bottom: 0px;
+  margin-left: 77%;
+  min-height: 60px;
+  min-width: 0;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 20%;
+  will-change: transform;
+  position: relative;
+}
+
+#placeB:active {
+  position: relative;
+  top: -1px;
+  background-color: white;
+}
