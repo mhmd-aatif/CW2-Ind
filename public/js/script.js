@@ -78,10 +78,17 @@ let webstore = new Vue({
       var count = {};
 
       for (var i = 0; i < this.displayCart.length; i++) {
-        if (this.displayCart[i].title in count) {
-          count[this.displayCart[i].title]++;
+        if (
+          this.displayCart[i].title + "[" + this.displayCart[i].id + "]" in
+          count
+        ) {
+          count[
+            this.displayCart[i].title + "[" + this.displayCart[i].id + "]"
+          ]++;
         } else {
-          count[this.displayCart[i].title] = 1;
+          count[
+            this.displayCart[i].title + "[" + this.displayCart[i].id + "]"
+          ] = 1;
         }
       }
 
