@@ -4,6 +4,20 @@ const path = require("path");
 const app = express();
 // const cors = require("cors");
 
+function logCurrentTime() {
+  const time = new Date();
+  const options = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  };
+
+  return time.toLocaleDateString("en-US", options);
+}
+
 app.use(express.json());
 
 app.set("path", 3000);
@@ -34,7 +48,7 @@ app.get("/collection/:collectionName", (req, res, next) => {
   req.collection.find({}).toArray((e, results) => {
     if (e) return next(e);
     res.send(results);
-    console.log("Lessons Data Sent Successful!");
+    console.log(logCurrentTime() + " Lessons Data Sent Successful!");
   });
 });
 
@@ -42,7 +56,7 @@ app.post("/collection/:collectionName", (req, res, next) => {
   req.collection.insert(req.body, (e, results) => {
     if (e) return next(e);
     res.send(results.ops);
-    console.log("Order Added Successfully!");
+    console.log(logCurrentTime() + " Order Added Successfully!");
   });
 });
 
@@ -59,7 +73,7 @@ app.get("/lessons", (req, res, next) => {
   collection.find({}).toArray((e, results) => {
     if (e) return next(e);
     res.send(results);
-    console.log("Lessons Data Sent Successful!");
+    console.log(logCurrentTime() + " Lessons Data Sent Successful!");
   });
 });
 
@@ -90,10 +104,15 @@ app.get("/lessons/:id", (req, res) => {
   collection.findOne({ id: pid }, (err, result) => {
     if (err || !result) {
       res.status(404).send({ message: "Lesson Not Found!" });
-      console.log("Lesson Not Found!");
+      console.log(logCurrentTime() + " Lesson Not Found!");
     } else {
       res.send(result);
-      console.log(result.title + " Lesson Data Accessed Successfully!");
+      console.log(
+        logCurrentTime() +
+          " " +
+          result.title +
+          " Lesson Data Accessed Successfully!"
+      );
     }
   });
 });
@@ -104,10 +123,12 @@ app.get("/images/:id", (req, res) => {
   collection.findOne({ id: pid }, (err, result) => {
     if (err || !result) {
       res.status(404).send({ message: "File Not Found!" });
-      console.log("File Not Found!");
+      console.log(logCurrentTime() + " File Not Found!");
     } else {
       res.sendFile(path.join(__dirname, "public\\" + result.image));
-      console.log(result.title + " Image Accessed Successfully!");
+      console.log(
+        logCurrentTime() + " " + result.title + " Image Accessed Successfully!"
+      );
     }
   });
 });
@@ -136,9 +157,9 @@ app.put("/lessons", (req, res, next) => {
       { safe: true, multi: false },
       (e, result) => {
         if (e || !result) {
-          console.log("Space Updated Error!");
+          console.log(logCurrentTime() + " Space Updated Error!");
         } else {
-          console.log("Space Updated Successfully!");
+          console.log(logCurrentTime() + " Space Updated Successfully!");
         }
       }
     );
@@ -156,5 +177,5 @@ app.delete("/collection/:collectionName/:id", (req, res, next) => {
 });
 
 app.listen(3000, () => {
-  console.log("Listening on port 3000");
+  console.log(logCurrentTime() + " Listening on port 3000");
 });
