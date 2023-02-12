@@ -125,7 +125,7 @@
           <p>Last Name : {{order.lastName}}</p>
           <p>Address : {{order.address}}</p>
           <p>City : {{order.city}}</p>
-          <p>Zip : {{order.zip}}</p>
+          <p>Phone Number : {{order.phone}}</p>
           <p>Emirate : {{order.state}}</p>
           <p>Gift : {{order.gift}}</p>
           <p>Method : {{order.method}}</p>
@@ -188,8 +188,8 @@
               </select>
             </p>
             <p>
-              <strong>Zip/Postal Code:</strong>
-              <input v-model.number="order.zip" type="number" />
+              <strong>Phone Number:</strong>
+              <input v-model="order.phone" type="number" />
             </p>
           </div>
           <p>

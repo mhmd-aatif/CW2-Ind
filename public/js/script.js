@@ -12,7 +12,7 @@ let webstore = new Vue({
       address: "",
       city: "",
       state: "",
-      zip: "",
+      phone: "",
       method: "Home",
       gift: "Send as a gift",
       sendGift: "Send as a gift",
@@ -111,7 +111,7 @@ let webstore = new Vue({
           lastName: this.order.lastName,
           address: this.order.address,
           city: this.order.city,
-          zip: this.order.zip,
+          phone: this.order.phone,
           emirate: this.order.state,
           gift: this.order.gift,
           method: this.order.method,
@@ -174,7 +174,7 @@ let webstore = new Vue({
         this.order.lastName.match(/^[A-Za-z]+$/) &&
         this.order.address != "" &&
         this.order.city.match(/^[A-Za-z]+$/) &&
-        this.order.zip != "" &&
+        this.order.phone != "" &&
         this.order.state != ""
       );
     },
