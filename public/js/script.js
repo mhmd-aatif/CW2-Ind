@@ -1,5 +1,3 @@
-// import axios from "axios";
-
 //the root Vue instance
 let webstore = new Vue({
   el: "#app", // links to the div
