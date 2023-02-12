@@ -253,7 +253,7 @@ let webstore = new Vue({
   created: function () {
     console.log("requesting data from the server ...");
     // retrieving data from the server
-    fetch("http://localhost:3000/collection/lessons").then(function (response) {
+    fetch("http://localhost:3000/lessons").then(function (response) {
       response.json().then(function (json) {
         // storing the response
         webstore.products = json;
