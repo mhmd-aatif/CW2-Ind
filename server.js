@@ -2,7 +2,6 @@ const { Console } = require("console");
 const express = require("express");
 const path = require("path");
 const app = express();
-// const cors = require("cors");
 
 function logCurrentTime() {
   const time = new Date();
@@ -21,7 +20,6 @@ function logCurrentTime() {
 app.use(express.json());
 
 app.set("path", 3000);
-// app.use(cors()); // using cors
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -86,8 +84,6 @@ app.post("/search", (req, res, next) => {
     .toArray((e, results) => {
       if (e) return next(e);
       res.send(results);
-      // console.log(results);
-      // console.log("Search Data Sent Successful!");
     });
 });
 

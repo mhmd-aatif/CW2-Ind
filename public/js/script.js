@@ -192,14 +192,9 @@ let webstore = new Vue({
         })
           .then((response) => response.json())
           .then((data) => {
-            //console.log(data);
             webstore.results = data;
           })
           .catch((error) => console.error(error));
-
-        // console.log(this.results);
-
-        //return this.products.filter((item) => this.results.includes(item.id));
 
         return this.products.filter((obj1) => {
           return this.results.some((obj2) => {
