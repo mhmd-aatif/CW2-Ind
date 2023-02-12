@@ -1,8 +1,9 @@
-const { Console } = require("console");
+//Importing the required elements
 const express = require("express");
 const path = require("path");
 const app = express();
 
+//Function to log the current time
 function logCurrentTime() {
   const time = new Date();
   const options = {
@@ -17,16 +18,19 @@ function logCurrentTime() {
   return time.toLocaleDateString("en-US", options);
 }
 
+//To handle requests with JSON payload
 app.use(express.json());
 
 app.set("path", 3000);
 
+//Setting Headers
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   next();
 });
-const MongoClient = require("mongodb").MongoClient;
 
+//Setting up mongodb connection
+const MongoClient = require("mongodb").MongoClient;
 let db;
 MongoClient.connect(
   "mongodb+srv://aatif:aatif123@cluster0.c2jqgfi.mongodb.net",
@@ -36,13 +40,16 @@ MongoClient.connect(
   }
 );
 
-app.use(express.static("public")); // setting public directory as static content
+// setting public directory as static content
+app.use(express.static("public"));
 
+//creating parameter for collection name
 app.param("collectionName", (req, res, next, collectionName) => {
   req.collection = db.collection(collectionName);
   return next();
 });
 
+// Setting up method to handle post requests
 app.post("/collection/:collectionName", (req, res, next) => {
   req.collection.insert(req.body, (e, results) => {
     if (e) return next(e);
@@ -51,6 +58,7 @@ app.post("/collection/:collectionName", (req, res, next) => {
   });
 });
 
+// Setting up method to handle get request to get a particular element from mongodb
 const ObjectID = require("mongodb").ObjectId;
 app.get("/collection/:collectionName/:id", (req, res, next) => {
   req.collection.findOne({ _id: new ObjectID(req.params.id) }, (e, result) => {
@@ -59,6 +67,7 @@ app.get("/collection/:collectionName/:id", (req, res, next) => {
   });
 });
 
+// Setting up method to handle get request to get all lessons
 app.get("/lessons", (req, res, next) => {
   const collection = mg.db("webstore").collection("lessons");
   collection.find({}).toArray((e, results) => {
@@ -68,6 +77,7 @@ app.get("/lessons", (req, res, next) => {
   });
 });
 
+// Setting up method to handle search requests
 app.post("/search", (req, res, next) => {
   const data = req.body.search;
   const collection = mg.db("webstore").collection("lessons");
@@ -87,6 +97,7 @@ app.post("/search", (req, res, next) => {
     });
 });
 
+// Setting up method to handle get request to get a lesson with the ID
 app.get("/lessons/:id", (req, res) => {
   const pid = parseInt(req.params.id);
   const collection = mg.db("webstore").collection("lessons");
@@ -106,6 +117,7 @@ app.get("/lessons/:id", (req, res) => {
   });
 });
 
+// Setting up method to handle get request to get the image of a lesson with the ID
 app.get("/images/:id", (req, res) => {
   const pid = parseInt(req.params.id);
   const collection = mg.db("webstore").collection("lessons");
@@ -122,18 +134,7 @@ app.get("/images/:id", (req, res) => {
   });
 });
 
-app.put("/collection/:collectionName/:id", (req, res, next) => {
-  req.collection.update(
-    { _id: new ObjectID(req.params.id) },
-    { $set: req.body },
-    { safe: true, multi: false },
-    (e, result) => {
-      if (e) return next(e);
-      res.send(result ? { msg: "success" } : { msg: "error" });
-    }
-  );
-});
-
+// Setting up method to handle put request to update the spaces
 app.put("/lessons", (req, res, next) => {
   const data = req.body;
   const collection = mg.db("webstore").collection("lessons");
@@ -155,16 +156,7 @@ app.put("/lessons", (req, res, next) => {
   });
 });
 
-app.delete("/collection/:collectionName/:id", (req, res, next) => {
-  req.collection.deleteOne(
-    { _id: new ObjectID(req.params.id) },
-    (e, result) => {
-      if (e) return next(e);
-      res.send(result ? { msg: "success" } : { msg: "error" });
-    }
-  );
-});
-
+// Setting up the port
 app.listen(3000, () => {
   console.log(logCurrentTime() + " Listening on port 3000");
 });

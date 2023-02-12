@@ -102,6 +102,7 @@ let webstore = new Vue({
 
       this.order.cart = text.slice(0, -2);
 
+      // to post the order details
       fetch("http://localhost:3000/collection/orders", {
         method: "POST",
         body: JSON.stringify({
@@ -124,6 +125,7 @@ let webstore = new Vue({
         .then((json) => console.log(json))
         .catch((error) => console.error(error));
 
+      // to update the spaces of the lessons
       fetch("http://localhost:3000/lessons", {
         method: "PUT",
         headers: {
@@ -181,6 +183,7 @@ let webstore = new Vue({
     //method for searching and sorting products
     sortedProducts() {
       if (this.search !== "") {
+        //to search the lessons
         fetch("http://localhost:3000/search", {
           method: "POST",
           body: JSON.stringify({
@@ -243,8 +246,8 @@ let webstore = new Vue({
       }
     },
   },
+  //these functions run before the element is mounted
   created: function () {
-    console.log("requesting data from the server ...");
     // retrieving data from the server
     fetch("http://localhost:3000/lessons").then(function (response) {
       response.json().then(function (json) {
