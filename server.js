@@ -94,6 +94,7 @@ app.post("/search", (req, res, next) => {
     .toArray((e, results) => {
       if (e) return next(e);
       res.send(results);
+      console.log(logCurrentTime() + " Search Data Sent");
     });
 });
 

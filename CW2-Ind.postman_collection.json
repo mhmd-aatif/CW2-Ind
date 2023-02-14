@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "8be68ad5-3bd9-4e39-9419-e98a69caad10",
+		"name": "CW2-Ind",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25535501"
+	},
+	"item": [
+		{
+			"name": "returns all the lessons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/lessons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lessons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saves a new order to the ‘order’ collection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"coursestaken\": \"Art[1001] X 2, Coding[1002] X 3\",\r\n    \"totalcourses\": 5,\r\n    \"firstName\": \"Aatif\",\r\n    \"lastName\": \"Test\",\r\n    \"address\": \"Barsha\",\r\n    \"city\": \"Heights\",\r\n    \"phone\": \"0500000000\",\r\n    \"emirate\": \"Dubai\",\r\n    \"gift\": \"Send as gift\",\r\n    \"method\": \"Home\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/collection/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"collection",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updates the number of available spaces in the ‘lesson’",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"id\": 1001,\r\n    \"title\": \"Art\",\r\n    \"location\": \"Nahda\",\r\n    \"space\": 10,\r\n    \"price\": 200,\r\n    \"image\": \"images/art.png\",\r\n    \"rating\": 4,\r\n    \"displaySpace\": 10\r\n  },\r\n  {\r\n    \"id\": 1002,\r\n    \"title\": \"Basket Ball\",\r\n    \"location\": \"Oud Metha\",\r\n    \"space\": 10,\r\n    \"price\": 245,\r\n    \"image\": \"images/basket_ball.png\",\r\n    \"rating\": 5,\r\n    \"displaySpace\": 10\r\n  }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/lessons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lessons"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
